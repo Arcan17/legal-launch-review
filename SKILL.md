@@ -22,8 +22,10 @@ Cierra **siempre** la revisión con: *"Esto no es asesoría legal. Confirma los 
    - Preparación de lanzamiento (seguridad mínima, T&C, e-commerce, licencias) → [launch-readiness-checklist.md](launch-readiness-checklist.md)
 3. **Revisa cada ítem contra el proyecto real** — busca evidencia en el código, no asumas. "No encontré X" es un hallazgo válido.
 4. **Empieza el reporte con el SEMÁFORO** (ver abajo): lo primero que el usuario lee es si puede lanzar o no, en una frase.
-5. **Reporta** cada hallazgo en el formato de abajo, ordenado por severidad (Alta primero).
-6. **Cierra** con resumen y disclaimer.
+5. **Si es una RE-revisión** (el usuario dice que ya corrigió algo): verifica cada corrección **contra el código actual, NO contra el mensaje del commit**. Un commit que dice "arreglado" no es prueba; el código sí. Marca cada punto previo como ✅ Resuelto / ⚠️ Parcial / ❌ Sigue.
+6. **Incluye una sección "✅ Lo que ya está bien"** con lo que el proyecto resolvió correctamente. Da balance, es honesto y motiva — el reporte no debe sentirse solo negativo. En una re-revisión, aquí van los puntos antes pendientes ahora resueltos (con dónde lo verificaste).
+7. **Reporta** cada hallazgo de riesgo en el formato de abajo, ordenado por severidad (Alta primero).
+8. **Cierra** con resumen y disclaimer. Si aplicaste correcciones en esta misma sesión, recuerda al usuario: *"tras aplicar correcciones, vuelve a revisar contra el código."*
 
 ## Cómo escribir (lenguaje simple — REGLA PRINCIPAL)
 
@@ -69,12 +71,26 @@ En una frase: [qué falta, en lenguaje simple]
 - **🟡 Media** → puedes esperar un poco, pero arréglalo antes de tener usuarios de verdad.
 - **🟢 Baja** → mejora recomendada, no urgente.
 
+### Calibración — ejemplos de casos borde
+
+Usa estos para ser **consistente** entre revisiones. La pregunta clave para "¿bloquea?": *¿expone datos, engaña al usuario, o incumple una promesa visible?* Si sí → Alta/bloquea.
+
+- **Aviso de privacidad con contacto placeholder (`[tu correo]`)** → 🔴 **Alta, bloquea.** Un aviso publicado sin canal real de derechos es un aviso incompleto en vivo, no un detalle.
+- **Promesa de la landing que el código no cumple** (ej: "se borra solo" sin job de borrado) → 🔴 **Alta, bloquea.** Es lo más grave: induce a error sobre datos.
+- **API pública sin rate limiting que llama a un LLM de pago** → 🟡 **Media, no bloquea.** Es riesgo de costo/abuso, no exposición de datos. (Sube a Alta si además filtra datos.)
+- **Afirmar "cumple la Ley X"** → 🟡 **Media.** Riesgo reputacional/legal; suavizar a "inspirado en". Sube a Alta solo si se cobra por ese cumplimiento.
+- **Secreto/clave con valor por defecto si no se configura** → 🟢/🟡 según qué proteja. Adivinhable + protege datos → Media; solo hashes de auditoría → Baja.
+- **CORS `*` en una API con auth por API key** → 🟢/🟡. Sin auth ni rate limit → Media; con auth → Baja.
+
+Ante la duda entre dos niveles, **elige el más alto y explica por qué** — es más seguro para el usuario.
+
 ## Reglas
 
 - Sé concreto: cita el archivo (al final del hallazgo). Un hallazgo sin ubicación es una sospecha, no un hallazgo.
 - No inventes normativa. Si no estás seguro del detalle legal, dilo y marca "verificar".
 - No generes políticas/T&C "listas para usar" como si fueran válidas legalmente — puedes dar un borrador, pero etiquétalo como borrador a revisar por abogado.
 - Si el reporte es largo, ofrece al final atacar los bloqueantes uno por uno.
+- **Ofrece guardar el reporte.** Al cerrar, pregunta si quiere guardarlo en un archivo (ej: `revision-legal.md` en la raíz del proyecto). En apps que se revisan más de una vez, el historial permite comparar antes/después. Si acepta, en una re-revisión añade la fecha al inicio (ej: `## Revisión 2026-06-24`) para no pisar la anterior.
 - **Solo Chile.** Si la app opera fuera de Chile, marca el hallazgo "jurisdicción no cubierta" y **NO inventes** reglas de GDPR (UE), EE.UU., México, Argentina u otros países. Recomienda consultar un especialista de esa jurisdicción.
 
 ## Ejemplos del formato de salida

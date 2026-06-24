@@ -2,6 +2,15 @@
 
 Todas las versiones notables de este skill se documentan aquí.
 
+## [0.2.0] — 2026-06-24
+
+### Añadido
+- Sección obligatoria **"✅ Lo que ya está bien"** en el reporte (balance, no solo riesgos).
+- **Calibración de severidad** con ejemplos de casos borde, para consistencia entre revisiones.
+- Paso de **re-revisión**: verificar correcciones contra el código, no contra el commit; marcar ✅/⚠️/❌.
+- **Ofrecer guardar el reporte** en un archivo (ej. `revision-legal.md`) para comparar antes/después.
+- Ejemplo `rag-app-report-example.md` actualizado con la sección de balance.
+
 ## [0.1.0] — 2026-06-23
 
 Primera versión pública. Foco: Chile · apps IA / SaaS / RAG.

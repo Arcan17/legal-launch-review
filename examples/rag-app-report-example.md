@@ -10,6 +10,14 @@
 
 ---
 
+## ✅ Lo que ya está bien
+
+- El sistema que oculta el RUT/correo **antes** de mandarlo a la IA funciona de verdad (verificado en `app/services/pipeline.py`: el orden es scrub → embed → LLM).
+- Aislamiento por sesión: un usuario no puede ver los documentos de otro.
+- La transferencia internacional (texto sin PII a EE.UU.) está divulgada en el aviso.
+
+---
+
 ## 🔴 Lo que bloquea el lanzamiento
 
 ### 1. Los datos personales podrían quedarse guardados más de lo que prometes
