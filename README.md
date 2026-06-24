@@ -37,14 +37,26 @@ Cubre: datos personales, aviso de privacidad, términos y condiciones, riesgos d
 
 ## Instalación
 
-Copia la carpeta en tu directorio de skills de Claude Code:
+**Claude Code** (skill personal):
 
 ```bash
 git clone https://github.com/Arcan17/legal-launch-review.git \
   ~/.claude/skills/legal-launch-review
 ```
 
-Queda disponible en todas tus sesiones, en cualquier proyecto.
+**Codex** (skill de usuario o de repo):
+
+```bash
+# Usuario
+mkdir -p ~/.agents/skills
+git clone https://github.com/Arcan17/legal-launch-review.git ~/.agents/skills/legal-launch-review
+
+# O dentro de un proyecto
+mkdir -p .agents/skills
+git clone https://github.com/Arcan17/legal-launch-review.git .agents/skills/legal-launch-review
+```
+
+Queda disponible en todas tus sesiones, en cualquier proyecto. Ver también [`AGENTS.md`](AGENTS.md).
 
 ## Uso
 
@@ -70,7 +82,11 @@ legal-launch-review/
 ├── chile-privacy-checklist.md     # Datos personales y privacidad (Chile)
 ├── ai-app-checklist.md            # Riesgos de IA / RAG / LLM externo
 ├── launch-readiness-checklist.md  # Seguridad, T&C, e-commerce, licencias
-└── referencias-legales.md         # Leyes relevantes + links oficiales (a verificar)
+├── referencias-legales.md         # Leyes relevantes + links oficiales (a verificar)
+├── examples/                      # Reportes de ejemplo (guían el formato de salida)
+├── AGENTS.md                      # Instrucciones para Codex / otros agentes
+├── DISCLAIMER.md                  # Aviso "no es asesoría legal"
+└── scripts/validate-skill.sh      # Validación básica de estructura
 ```
 
 ## Contribuir

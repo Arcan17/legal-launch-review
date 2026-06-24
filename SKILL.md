@@ -75,3 +75,8 @@ En una frase: [qué falta, en lenguaje simple]
 - No inventes normativa. Si no estás seguro del detalle legal, dilo y marca "verificar".
 - No generes políticas/T&C "listas para usar" como si fueran válidas legalmente — puedes dar un borrador, pero etiquétalo como borrador a revisar por abogado.
 - Si el reporte es largo, ofrece al final atacar los bloqueantes uno por uno.
+- **Solo Chile.** Si la app opera fuera de Chile, marca el hallazgo "jurisdicción no cubierta" y **NO inventes** reglas de GDPR (UE), EE.UU., México, Argentina u otros países. Recomienda consultar un especialista de esa jurisdicción.
+
+## Ejemplos del formato de salida
+
+Para imitar el formato y el tono, mira [examples/rag-app-report-example.md](examples/rag-app-report-example.md) (app RAG) y [examples/ecommerce-saas-report-example.md](examples/ecommerce-saas-report-example.md) (SaaS con pagos).
